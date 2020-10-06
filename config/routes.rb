@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {
+    # registrationsのみオーバーライドしたコントローラへルーティングを変更する
+    :registrations => 'users/registrations'
+  }
   resources :users,only: [:show,:index,:edit,:update] do
     # URL:/user/:user_id/relationships
     resource :relationships, only: [:create, :destroy]
